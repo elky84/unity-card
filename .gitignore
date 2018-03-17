@@ -1,0 +1,81 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Executables
+*.out
+*.app
+
+# Project temponary files
+*.sdf
+*.suo
+*.opendb
+
+# Debug output files
+*_Debug.*
+*.pdb
+
+# Build intermediate files
+*.idb
+*.obj
+*.tlog
+*.lastbuildstate
+*.ipch
+*.cache
+
+# Build Intermediate directories
+Intermediate/
+Debug/
+
+# heavy dependency files.
+Dependencies/
+
+# UnitTestResults.xml
+UnitTestResults.xml
+
+# Log files
+*.log
+
+
+# ignore vs db
+*.VC.db
+
+# ignore dependencies
+dependencies/
+
+*.pidb
+*.pidb.meta
+
+
+# ignore python temponary dir
+.idea
+__pycache__
+
+
+#ignore unity temponary
+Temp/
+Library/
+
+# ignore VS files
+*.csproj
+*.userprefs
+*.sln
+/client/Assets/External
