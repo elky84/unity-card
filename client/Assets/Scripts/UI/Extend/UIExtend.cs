@@ -138,7 +138,7 @@ public static class ExtendMethods
         var names = Enum.GetNames(typeof(ButtonState));
         foreach (var name in names)
         {
-            var t = button.FindChild(name);
+            var t = button.Find(name);
             if (t != null)
                 t.SetActive(t.name == s.ToString());
         }
@@ -149,7 +149,7 @@ public static class ExtendMethods
         var names = Enum.GetNames(typeof(ButtonState));
         foreach (var name in names)
         {
-            var t = button.FindChild(name);
+            var t = button.Find(name);
             if (t != null && t.GetActive())
                 return (ButtonState)Enum.Parse(typeof(ButtonState), t.name);
         }
@@ -174,7 +174,7 @@ public static class ExtendMethods
 		{
 			if (onClick != null && buttonClicked == false)
 			{
-				// ³ªÁß¿¡ ¹öÆ° »ç¿îµå Ãß°¡½Ã ¼öÁ¤
+				// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				//PlayButtonClickSound();
 
 				buttonClicked = true;
@@ -229,13 +229,13 @@ public static class ExtendMethods
 
 	public static void SetButtonTrigger(this Transform b, ButtonState s, EventDelegate.Callback onClick, bool buttonTween = true)
 	{
-		Transform targetT = b.FindChild(s.ToString());
+		Transform targetT = b.Find(s.ToString());
 		SetTrigger(targetT, onClick, buttonTween);
 	}
 
 	public static UIEventTrigger GetButtonTrigger(this Transform b, ButtonState s)
 	{
-		Transform targetT = b.FindChild(s.ToString());
+		Transform targetT = b.Find(s.ToString());
 		return GetTrigger(targetT);
 	}
 
@@ -265,7 +265,7 @@ public static class ExtendMethods
 
 	public static UILabel SetChildText(this Transform t, string text)
 	{
-		return t.FindChild("label").SetText(text);
+		return t.Find("label").SetText(text);
 	}
 
 	public static void SetSprite(this Transform t, string spriteName)
