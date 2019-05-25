@@ -42,20 +42,18 @@ public class CardDragDrop : UIDragDropItem
                 var parentName = surface.name.Replace("_holder", "");
                 var holderParent = GameObject.Find(parentName);
                 var cardPile = holderParent.GetComponent<CardPile>();
-                {
 
-                    if (cardView.is_on_pile)
-                    {
-                        base.OnDragDropRelease(surface);
-                        return;
-                    }
-                    
-                    cardView.Play();
-                    cardView.Action();
-                    cardPile.AddCard(gameObject);
+                base.OnDragDropRelease(surface);
+                if (cardView.isOnPile)
+                {
+                    return;
                 }
+                    
+                cardView.Play();
+                cardView.Action();
+                cardPile.AddCard(gameObject);
             }
-            else if(cardView.is_on_pile && surface.name.Contains("character_1")) // 임시 하드 코딩! 공겨겨겨격!!
+            else if(cardView.isOnPile && surface.name.Contains("character1")) // 임시 하드 코딩! 공겨겨겨격!!
             {
                 var characterView = surface.GetComponent<CharacterView>();
                 characterView.Damage(cardData.attack);

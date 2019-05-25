@@ -7,54 +7,50 @@ using System.ComponentModel;
 public class UIIngame : MonoBehaviour
 {
     Deck deck = new Deck();
-    public GameObject card_object;
-    public GameObject hand_0;
-    public GameObject hand_1;
-    public GameObject pile_0;
-    public GameObject pile_1;
+    public GameObject cardObject;
+    public GameObject hand0;
+    public GameObject hand1;
+    public GameObject pile0;
+    public GameObject pile1;
 
-    public GameObject character_0;
-    public GameObject character_1;
+    public GameObject character0;
+    public GameObject character1;
 
     int turn = 0;
-    bool is_my_turn = true;
+    bool isMyTurn = true;
 
-    public GameObject turn_end;
+    public GameObject turnEnd;
 
     void Start()
     {
         for(int n = 0; n < 5; ++n)
         {
             var card = deck.pop();
-            var card_obj = Instantiate(card_object) as GameObject;
-            card_obj.transform.parent = hand_0.transform;
+            var card_obj = Instantiate(cardObject) as GameObject;
+            card_obj.transform.parent = hand0.transform;
             card_obj.transform.localScale = Vector3.one;
 
             var card_component = card_obj.GetComponent<CardView>();
             card_component.SetCard(card, true);
-            hand_0.GetComponent<CardPile>().AddCard(card_obj);
-
-            hand_0.GetComponent<UIGrid>().Reposition();
+            hand0.GetComponent<CardPile>().AddCard(card_obj);
         }
 
-        character_0.GetComponent<CharacterView>().SetCharacter(new Character(0, 30));
+        character0.GetComponent<CharacterView>().SetCharacter(new Character(0, 30));
 
         for (int n = 0; n < 5; ++n)
         {
             var card = deck.pop();
-            var card_obj = Instantiate(card_object) as GameObject;
-            card_obj.transform.parent = hand_1.transform;
+            var card_obj = Instantiate(cardObject) as GameObject;
+            card_obj.transform.parent = hand1.transform;
             card_obj.transform.localScale = Vector3.one;
 
             var card_component = card_obj.GetComponent<CardView>();
             card_component.SetCard(card, false);
-            hand_1.GetComponent<CardPile>().AddCard(card_obj);
-
-            hand_1.GetComponent<UIGrid>().Reposition();
+            hand1.GetComponent<CardPile>().AddCard(card_obj);
         }
 
-        character_1.GetComponent<CharacterView>().SetCharacter(new Character(0, 30));
-        on_my_turn();
+        character1.GetComponent<CharacterView>().SetCharacter(new Character(0, 30));
+        onMyTurn();
     }
 
 
@@ -63,57 +59,57 @@ public class UIIngame : MonoBehaviour
 
     }
 
-    void set_turn_end_button()
+    void setTurnEndButton()
     {
-        turn_end.transform.Find("button").SetTrigger(() =>
+        turnEnd.transform.Find("button").SetTrigger(() =>
         {
-            if (is_my_turn)
-                is_my_turn = false;
+            if (isMyTurn)
+                isMyTurn = false;
 
-            foreach (Transform card in hand_0.transform)
+            foreach (Transform card in hand0.transform)
             {
                 card.GetComponent<CardView>().Action();
             }
 
-            foreach (Transform card in pile_0.transform.GetComponentInChildren<UIGrid>().transform)
+            foreach (Transform card in pile0.transform.GetComponentInChildren<UIGrid>().transform)
             {
                 card.GetComponent<CardView>().Action();
             }
 
-            turn_end.transform.Find("button").RemoveTrigger();
-            turn_end.transform.Find("button").SetActive(false);
+            turnEnd.transform.Find("button").RemoveTrigger();
+            turnEnd.transform.Find("button").SetActive(false);
 
-            StartCoroutine(ai_turn());
+            StartCoroutine(AiTurn());
 
         }, false);
     }
 
-    void on_my_turn()
+    void onMyTurn()
     {
-        set_turn_end_button();
+        setTurnEndButton();
 
-        foreach (Transform card in hand_0.transform)
+        foreach (Transform card in hand0.transform)
         {
             card.GetComponent<CardView>().Turn();
         }
 
-        foreach (Transform card in pile_0.transform.GetComponentInChildren<UIGrid>().transform)
+        foreach (Transform card in pile0.transform.GetComponentInChildren<UIGrid>().transform)
         {
             card.GetComponent<CardView>().Turn();
         }
     }
 
-    IEnumerator ai_turn()
+    IEnumerator AiTurn()
     {
         yield return new WaitForSeconds(1f);
-        next_turn();
+        NextTurn();
     }
 
-    void next_turn()
+    void NextTurn()
     {
         turn += 1;
-        set_turn_end_button();
-        turn_end.transform.Find("button").SetActive(true);
-        on_my_turn();
+        setTurnEndButton();
+        turnEnd.transform.Find("button").SetActive(true);
+        onMyTurn();
     }
 }

@@ -7,7 +7,7 @@ public class CardView : MonoBehaviour {
     public Card Data;
 
     [HideInInspector]
-    public bool is_on_pile = false;
+    public bool isOnPile = false;
 
 	void Start ()
     {	
@@ -36,7 +36,7 @@ public class CardView : MonoBehaviour {
 
     public void Play()
     {
-        is_on_pile = true;
+        isOnPile = true;
     }
 
     public void Turn()
